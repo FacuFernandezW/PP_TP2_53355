@@ -130,6 +130,11 @@ public class App {
                 System.out.println("\n\nDATOS DEL EVENTO");
                 evento.mostrarDatos();
 
+                //ENVIAR LOS TICKETS de acceso a los estudiantes confirmados
+                Thread envioTicketsThread=new hilos.EnvioTicketsThread(evento); //acá podría haber hecho el import y no poner el hilos.
+                envioTicketsThread.start(); // acá nunca se pone run porque sino se ejecutaría el run pero no en un hilo. sería secuencialmete como venimos trabajando.
+
+
                 // Uso de generics incorporado en EventoUniversitario.
                 // El evento filtra sus propias actividades sin romper la composición del modelo.
                 List<Taller> talleres = evento.filtrarActividadesPorTipo(Taller.class);

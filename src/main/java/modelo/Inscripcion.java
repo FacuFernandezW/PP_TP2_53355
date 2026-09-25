@@ -16,12 +16,19 @@ public class Inscripcion implements Serializable {
     private Estudiante estudiante;
     private LocalDate fecha;
     private String estado;
+    private TicketDeAcceso ticket;
 
     public Inscripcion(Actividad actividad, Estudiante estudiante, LocalDate fecha, String estado) {
         this.actividad = actividad;
         this.estudiante = estudiante;
         this.fecha = fecha;
         this.estado = estado;
+    }
+
+    //TICKET
+    public TicketDeAcceso getTicket(){
+        return ticket;
+
     }
 
     public Actividad getActividad() {
@@ -43,4 +50,20 @@ public class Inscripcion implements Serializable {
     public void confirmar() {
         this.estado = "CONFIRMADA";
     }
+
+
+    public final class TicketDeAcceso implements Serializable {
+        private String idTicket;
+        private LocalDate fechaEmision;
+
+        public TicketDeAcceso(){
+            this.idTicket= "TICKET-" + actividad.getId() + "-" + estudiante.getLegajo() + "-" + System.currentTimeMillis();
+            this.fechaEmision=LocalDate.now();
+            System.out.println("Ticket generado correctamente para la inscripción");
+        }
+        public void enviarTicket(){
+            System.out.println("Enviando ticket "+ idTicket + "al estudiante: "+ estudiante.getNombre() + "de legajo: "+ estudiante.getLegajo());
+        }
+    }
 }
+
